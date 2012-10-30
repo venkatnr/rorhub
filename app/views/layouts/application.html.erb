@@ -7,16 +7,74 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="user_nav">
+<div class="navigation">
   <% if user_signed_in? %>
-    Signed in as <%= current_user.email %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <span class = "textcolor"> Signed in as <%= current_user.email %>. Not you?</span>
+   <%= button_to "", destroy_user_session_path, :method => :delete, :id => "signout" %>
   <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %> or
-    <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %> or <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+    <%= button_to "", new_user_registration_path, :id => "signup" %><%= button_to "", new_user_session_path, :id => "signin" %>
+    <%= button_to "", user_omniauth_authorize_path(:google_oauth2) , :id => "googlesignin"%>  <%= button_to "", user_omniauth_authorize_path(:facebook) , :id => "facebooksignin"%>
   <% end %>
 </div>
 <%= yield %>
 
 </body>
 </html>
+<style>
+	.textcolor{color: #FFFFFF;
+    position: relative;
+    top: 11px;}
+	.navigation {
+   background-image:url('/assets/header.png');
+    height: 45px;
+    margin: -8px;
+     padding: 0 0 4px;
+}
+#signout{     background-image: url("/assets/run.png");
+    background-position: -2px -2px;
+    background-size: 23px auto;
+    float: right;
+    height: 23px;
+    position: relative;
+    right: 69%;
+    top: -13px;
+    width: 2%;}
+#signup{    background-image: url("/assets/singup.png");
+    background-position: -2px -2px;
+    background-size: 23px auto;
+    float: right;
+    height: 23px;
+    position: relative;
+    right: 17%;
+    top: 12px;
+    width: 2%;}
+#signin{     background-image: url("/assets/normaluser.png");
+    background-position: -2px -2px;
+    background-size: 23px auto;
+    float: right;
+    height: 23px;
+    position: relative;
+    right: 12%;
+    top: 11px;
+    width: 2%;}
+#googlesignin{   background-image: url("/assets/google.png");
+    background-position: -2px -2px;
+    background-size: 23px auto;
+    float: right;
+    height: 23px;
+    position: relative;
+    right: 7%;
+    top: 11px;
+    width: 2%;}
+
+#facebooksignin{  background-image: url("/assets/facebook.png");
+    background-position: -2px -2px;
+    background-size: 23px auto;
+    float: right;
+    height: 23px;
+    position: relative;
+    right: 2%;
+    top: 11px;
+    width: 2%;}
+
+	</style>
