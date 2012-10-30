@@ -12,6 +12,11 @@ gem 'bson_ext'
 gem 'devise'
 gem 'omniauth-openid'
 gem 'omniauth-google-oauth2'
+gem 'omniauth'
+gem 'oauth2'
+gem 'omniauth-facebook'
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

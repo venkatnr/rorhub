@@ -15,7 +15,10 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/mongoid'
   require "omniauth-google-oauth2"
+  require "omniauth-facebook"
   config.omniauth :google_oauth2, "1072973627144.apps.googleusercontent.com", "M4Ii766zHo7PPaCkm0bSi800", { access_type: "offline", approval_prompt: "" }
+  config.omniauth :facebook, "111715892321751", "de969a9fab9fda5388f05797e3fe1584",
+      {:scope => 'email, offline_access', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}}
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for

@@ -25,7 +25,8 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
-
+  field :provider,    :type => String
+  field :uid,    :type => String
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time
@@ -41,10 +42,22 @@ class User
   # field :authentication_token, :type => String
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
   data = access_token.info
-  if user = User.where(:email => data["email"]).first
-    user
-  else
-    User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
+	  if user = User.where(:email => data["email"]).first
+		user
+	  else
+		User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
+	  end
   end
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  user = User.where(:provider => auth.provider, :uid => auth.uid).first
+  unless user
+    user = User.create(name:auth.extra.raw_info.name,
+                         provider:auth.provider,
+                         uid:auth.uid,
+                         email:auth.info.email,
+                         password:Devise.friendly_token[0,20]
+                         )
+  end
+  user
 end
 end
