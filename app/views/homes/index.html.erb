@@ -11,9 +11,11 @@
 <% @homes.each do |home| %>
   <tr>
     <td><%= home.name %></td>
-    <td><%= link_to 'Show', home %></td>
-    <td><%= link_to 'Edit', edit_home_path(home) %></td>
-    <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if user_signed_in?%>
+		<td><%= link_to 'Show', home %></td>
+		<td><%= link_to 'Edit', edit_home_path(home) %></td>
+		<td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%end%>
   </tr>
 <% end %>
 </table>

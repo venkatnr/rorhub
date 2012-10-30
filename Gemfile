@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'mongoid', '~> 2.4.6'
 gem 'therubyracer'
 gem 'bson_ext'
+gem 'devise'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
