@@ -1,6 +1,5 @@
 class HomesController < ApplicationController
-  # GET /homes
-  # GET /homes.json
+before_filter :authenticate_user! , :except => [:index]
   def index
     @homes = Home.all
 
