@@ -12,7 +12,7 @@
     <span class = "textcolor"> Signed in as <%= current_user.email %>. Log-out</span>
    <%= button_to "", destroy_user_session_path, :method => :delete, :id => "signout" %>
   <% else %>
-    <%= button_to "", new_user_registration_path, :id => "signup" %><%= button_to "", new_user_session_path, :id => "signin" %>
+    <%#= button_to "", new_user_registration_path, :id => "signup" %><%= button_to "", new_user_session_path, :id => "signin" %>
     <%= button_to "", user_omniauth_authorize_path(:google_oauth2) , :id => "googlesignin"%>  <%= button_to "", user_omniauth_authorize_path(:facebook) , :id => "facebooksignin"%>
   <% end %>
 </div>
