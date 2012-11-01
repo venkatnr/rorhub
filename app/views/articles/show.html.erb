@@ -1,0 +1,29 @@
+All articles<br>
+<table border =1>
+<tr>
+<th>
+	Id
+</th>
+<th>
+	Title
+</th>
+<th>
+Description
+</th>
+</tr>
+
+<%@user.articles.each do |art|%>
+	<tr>
+		<td>
+			<%= art.id%>
+		</td>
+		<td>
+			<%= art.title%>
+		</td>
+		<td>
+			<%= art.description%>
+		</td>
+	</tr>
+<%end%>
+</table>
+
