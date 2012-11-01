@@ -18,8 +18,8 @@ class User
 
   ## Rememberable
   field :remember_created_at, :type => Time
-  #associations
-  has_many :homes
+  #Association
+  has_many :articles
   ## Trackable
   field :sign_in_count,      :type => Integer, :default => 0
   field :current_sign_in_at, :type => Time

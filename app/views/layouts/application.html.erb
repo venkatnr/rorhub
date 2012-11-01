@@ -9,7 +9,7 @@
 <body>
 <div class="navigation">
   <% if user_signed_in? %>
-    <span class = "textcolor"> Signed in as <%= current_user.email %>. Log-out</span>
+    <span class = "textcolor"> Signed in as <%= current_user.email %> </span>
    <%= button_to "", destroy_user_session_path, :method => :delete, :id => "signout" %>
   <% else %>
     <%#= button_to "", new_user_registration_path, :id => "signup" %><%= button_to "", new_user_session_path, :id => "signin" %>
@@ -25,20 +25,19 @@
     position: relative;
     top: 11px;}
 	.navigation {
-   background-image:url('/assets/header.png');
-    height: 45px;
-    margin: -8px;
-     padding: 0 0 4px;
+    background-image: url("/assets/header.png");
+    height: 51px;
+    margin: -7px -7px 2%;
 }
 #signout{  background-image: url("/assets/run.png");
     background-position: -2px -2px;
-    background-size: 28px auto;
+    background-size: 113% auto;
     float: right;
-    height: 29px;
+    height: 33px;
     position: relative;
-    right: 74%;
-    top: -7px;
-    width: 2%;}
+    right: 2%;
+    top: -10px;
+    width: 3%;}
 #signup{    background-image: url("/assets/singup.png");
     background-position: -2px -2px;
     background-size: 29px auto;
@@ -50,31 +49,31 @@
     width: 2%;}
 #signin{     background-image: url("/assets/normaluser.png");
     background-position: -2px -2px;
-    background-size: 29px auto;
+    background-size: 113% auto;
     float: right;
-    height: 30px;
+    height: 33px;
     position: relative;
     right: 12%;
     top: 11px;
-    width: 2%;}
+    width: 3%;}
 #googlesignin{   background-image: url("/assets/google.png");
     background-position: -2px -2px;
-    background-size: 29px auto;
+    background-size: 113% auto;
     float: right;
-    height: 30px;
+    height: 33px;
     position: relative;
-    right: 7%;
+    right: 5%;
     top: 11px;
-    width: 2%;}
+    width: 3%;}
 
 #facebooksignin{  background-image: url("/assets/facebook.png");
     background-position: -2px -2px;
-    background-size: 30px auto;
+    background-size: 113% auto;
     float: right;
-    height: 30px;
+    height: 33px;
     position: relative;
-    right: 2%;
+    right: -2%;
     top: 11px;
-    width: 2%;}
+    width: 3%;}
 
 	</style>

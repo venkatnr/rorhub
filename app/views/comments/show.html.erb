@@ -1,0 +1,13 @@
+Title: <%=@article.title%>
+Description <%= @article.description%>
+<br>
+<hr>
+<% @comment.each do |allcomments|%>
+<% if allcomments.c_approval_status == "1" %>
+	Comment Title: <%=allcomments.c_name%><br>
+	Comment Description: 	<%=allcomments.c_description%><br><hr>
+					
+<% end %>
+<%end%>
+<%= link_to "comment again",  new_article_comment_path(@article.id)%>
+<%= link_to "all articles", user_articles_path(@article.id)%>
