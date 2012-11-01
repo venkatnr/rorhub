@@ -1,6 +1,14 @@
-<h1>Editing article</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @article %> |
-<%= link_to 'Back', articles_path %>
+<%= form_for [@user, @user.articles.create] do |f| %>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

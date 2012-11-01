@@ -2,8 +2,11 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-   @user = User.find(params[:user_id])
-   raise @user.inspect
+	if user_signed_in?
+	 	@article = Article.find(:all, :conditions => {:user_id => current_user.id})	
+	else
+		@articles = Article.find(:all)
+	end
   end
   # GET /articles/1
   # GET /articles/1.json
@@ -22,39 +25,30 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
-    @article = Article.find(params[:id])
+    @user = User.find(params[:user_id])
+    @article = @user.articles.find(params[:id])
   end
 
   # POST /articles
   # POST /articles.json
-  
-
-
-
 
   def create
 	 @user = User.find(params[:user_id])
  
      @article = @user.articles.create!(params[:article])
 	 
-	 redirect_to user_article_path( @user.id, @article.id )
-   
+	 redirect_to root_path
   end
 
   # PUT /articles/1
   # PUT /articles/1.json
   def update
-    @article = Article.find(params[:id])
+     @user = User.find(params[:user_id])
+ 
+     @article = @user.articles.update(params[:id])
+	 
+	 redirect_to root_path
 
-    respond_to do |format|
-      if @article.update_attributes(params[:article])
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /articles/1
