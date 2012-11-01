@@ -1,7 +1,7 @@
 <%= form_for [@article, @article.comments.build]  do |f| %>
   <div class="field">
-    <%= f.label :c_title %><br />
-    <%= f.text_field :c_title %>
+    <%= f.label "Commenter Name" %><br />
+    <%= f.text_field :c_name %>
   </div>
   <div class="field">
     <%= f.label :c_description %><br />

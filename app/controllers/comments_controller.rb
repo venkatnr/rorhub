@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
+  require 'will_paginate/array' 
   def index
     @comments = Comment.all
 
@@ -20,7 +21,10 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.json
   def new
-   @article = Article.find(params[:article_id])
+		@article = Article.find(params[:article_id])
+        @comment = Comment.find(:all, :conditions => {:article_id => @article.id }).paginate(:page => params[:page], :per_page => 7)
+       @article_user_email = User.find(:all,  :conditions => {:id=> @article.user_id}).first
+      @email = @article_user_email.email
   end
 
   # GET /comments/1/edit
@@ -31,9 +35,23 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
+      
       @article = Article.find(params[:article_id])
-	  @comment = @article.comments.create!(params[:comment])
-      redirect_to article_comment_path(@article.id,  @comment.id )
+      @article_user_email = User.find(:all,  :conditions => {:id=> @article.user_id}).first
+      @email = @article_user_email.email
+      
+	if current_user.email == @email
+		@comment = @article.comments.create!(params[:comment])
+		@comment.update_attribute(:c_approval_status,1)
+		 redirect_to  new_article_comment_path(@article.id )
+	else
+	@comment = @article.comments.create!(params[:comment])
+	if @comment.save 
+		@mymail = @email
+		UserMailer.comment_approval(@mymail,@comment).deliver
+	end
+      redirect_to  new_article_comment_path(@article.id )
+    end  
   end
 
   # PUT /comments/1
@@ -63,4 +81,15 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+ def approve
+
+ @comment = Comment.find(params[:cid])
+ @articleid = Article.find(@comment.article_id)
+ @approve = params[:approve]
+ @comment.update_attributes(:c_approval_status => params[:approve])
+ redirect_to  new_article_comment_path( @articleid )
+ end
+
+
 end

@@ -7,9 +7,13 @@ Rorhub::Application.routes.draw do
   end
   
   resources :articles do 
-		resources :comments
+		resources :comments	
 	end
- 
+ resources :comments	do
+	collection do
+	get 'approve'
+	end
+	end
   root :to => 'articles#index'	
 
 end
