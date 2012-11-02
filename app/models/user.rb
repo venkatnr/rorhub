@@ -8,7 +8,8 @@ class User
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
-
+  field :image
+  field :picture
   validates_presence_of :email
   validates_presence_of :encrypted_password
   
@@ -28,6 +29,7 @@ class User
   field :last_sign_in_ip,    :type => String
   field :provider,    :type => String
   field :uid,    :type => String
+  field :name,    :type => String
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time
@@ -43,12 +45,14 @@ class User
   # field :authentication_token, :type => String
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
   data = access_token.info
+  raise data.inspect
 	  if user = User.where(:email => data["email"]).first
 		user
 	  else
-		User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
+		User.create!(:email => data["email"], :password => Devise.friendly_token[0,20], :name => data["name"], :picture => data["picture"])
 	  end
   end
+  
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   user = User.where(:provider => auth.provider, :uid => auth.uid).first
   unless user
@@ -56,9 +60,10 @@ class User
                          provider:auth.provider,
                          uid:auth.uid,
                          email:auth.info.email,
-                         password:Devise.friendly_token[0,20]
+                         image:auth.info.image,
+                         password:Devise.friendly_token[0,20],
                          )
   end
-  user
+ user
 end
 end

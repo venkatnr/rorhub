@@ -1,13 +1,29 @@
+<div id ="new_look">
 <%= form_for [@article, @article.comments.build]  do |f| %>
-  <div class="field">
-    <%= f.label "Commenter Name" %><br />
-    <%= f.text_field :c_name %>
-  </div>
-  <div class="field">
-    <%= f.label :c_description %><br />
-    <%= f.text_area :c_description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <table>
+  <tr>
+    <td><%= f.label "Commenter Name" %></td>
+    <td><%= f.text_field :c_name %></td>
+  </tr>
+  <tr>
+    <td><%= f.label "Description" %></td>
+    <td><%= f.text_area :c_description %></td>
+  </tr>
+  <tr>
+    <td><%= f.submit %></td>
+  </tr>
+  </table>
 <% end %>
+</div>
+<style>
+	#new_look{background: #F5FCFC;  border-radius: 5px 5px 5px 5px;
+    margin-left: 50px;
+    max-width: 65%;}
+    #tdleft{float: right; top: 9px; position: relative;}
+    textarea {
+    resize: none;
+    cols: 20;
+    rows: 40;
+    width: 462px; height: 214px;
+    }
+</style>

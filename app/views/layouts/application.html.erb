@@ -1,26 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Rorhub</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div class="navigation">
-  <% if user_signed_in? %>
-    <span class = "textcolor"> Signed in as <%= current_user.email %> </span>
-   <%= button_to "", destroy_user_session_path, :method => :delete, :id => "signout" %>
-  <% else %>
-    <%#= button_to "", new_user_registration_path, :id => "signup" %><%= button_to "", new_user_session_path, :id => "signin" %>
-    <%= button_to "", user_omniauth_authorize_path(:google_oauth2) , :id => "googlesignin"%>  <%= button_to "", user_omniauth_authorize_path(:facebook) , :id => "facebooksignin"%>
-  <% end %>
-</div>
-<%= yield %>
+	<head>
+	  <title>Rorhub</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<script >
+		ddsmoothmenu.init({
+			mainmenuid: "smoothmenu1", //menu DIV id
+			orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+			classname: 'ddsmoothmenu', //class added to menu's outer DIV
+			//customtheme: ["#1c5a80", "#18374a"],
+			contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+		})
 
-</body>
+		ddsmoothmenu.init({
+			mainmenuid: "smoothmenu2", //Menu DIV id
+			orientation: 'v', //Horizontal or vertical menu: Set to "h" or "v"
+			classname: 'ddsmoothmenu-v', //class added to menu's outer DIV
+			//customtheme: ["#804000", "#482400"],
+			contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+		})
+	</script>
+	<body >
+		<div class="navigation">
+		  <% if user_signed_in? %>
+			<span class = "textcolor"> Signed in as <%= current_user.email %> </span>
+		   <%= button_to "", destroy_user_session_path, :method => :delete, :id => "signout" %>
+		    <div class="menubar">
+				<div  id="smoothmenu1" class="ddsmoothmenu">
+					<ul>
+						<li id="article"><a href="/articles">Dashboard</a></li>
+						<li id="aboutme"><a href="/aboutme/index">About Me</a></li>
+					</ul>
+					
+				</div>
+			</div>
+		  <% else %>
+			<%#= button_to "", new_user_registration_path, :id => "signup" %><%= button_to "", new_user_session_path, :id => "signin" %>
+			<%= button_to "", user_omniauth_authorize_path(:google_oauth2) , :id => "googlesignin"%>  <%= button_to "", user_omniauth_authorize_path(:facebook) , :id => "facebooksignin"%>
+		  <% end %>
+		</div>
+		<div class="wrapper">
+			<%= yield %>
+		</div>
+		<footer>
+			<div id = "footer">
+				venkat corporation
+			</div>
+		</footer>
+	</body>
+	
 </html>
 <style>
+	#footer{
+	background-image: url("/assets/bg-footer.jpg");
+    border-top: 1px solid #BBBBBB;
+    clear: both;
+    color: #AAAAAA;
+    font-size: 0.9em;
+    padding: 5px;
+    text-align: center;
+
+}
 	.textcolor{color: #FFFFFF;
     position: relative;
     top: 11px;}
@@ -75,5 +118,20 @@
     right: -2%;
     top: 11px;
     width: 3%;}
+    .wrapper {
+	height: auto;
+    margin: 29px auto;
+    min-height: 100%;
+}
+html, body {
+height: 93%;
+}
+.menubar{   background: none repeat scroll 0 0 #FFFFFF;
+    float: right;
+    max-width: 15%;
+    position: relative;
+    right: 44%;
+    top: -24%;
+    }
 
 	</style>
