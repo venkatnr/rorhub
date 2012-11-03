@@ -1,0 +1,15 @@
+
+<table>
+<tr>
+<td>
+<b>Name: </b><%= current_user.name %>
+<td>
+<%if current_user.provider == "facebook"%>
+	<td>
+		<%= image_tag current_user.image %>
+	</td>
+	else
+	<%= image_tag current_user.picture%>
+<%end%>
+</tr>
+</table>

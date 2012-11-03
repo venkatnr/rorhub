@@ -1,11 +1,12 @@
 class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
+   require 'will_paginate/array' 
   def index
 	if user_signed_in?
-	 	@article = Article.find(:all, :conditions => {:user_id => current_user.id})	
+	 	@article = Article.find(:all, :conditions => {:user_id => current_user.id}).paginate(:page => params[:page], :per_page => 7)	
 	else
-		@articles = Article.find(:all)
+		@articles = Article.find(:all).paginate(:page => params[:page], :per_page => 7)
 	end
   end
   # GET /articles/1
