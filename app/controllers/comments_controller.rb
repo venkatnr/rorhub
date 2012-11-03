@@ -39,19 +39,22 @@ class CommentsController < ApplicationController
       @article = Article.find(params[:article_id])
       @article_user_email = User.find(:all,  :conditions => {:id=> @article.user_id}).first
       @email = @article_user_email.email
-      
+   if user_signed_in?   
 	if current_user.email == @email
 		@comment = @article.comments.create!(params[:comment])
 		@comment.update_attribute(:c_approval_status,1)
 		 redirect_to  new_article_comment_path(@article.id )
 	else
+
+    end  
+    else
 	@comment = @article.comments.create!(params[:comment])
 	if @comment.save 
 		@mymail = @email
 		UserMailer.comment_approval(@mymail,@comment).deliver
 	end
       redirect_to  new_article_comment_path(@article.id )
-    end  
+    end
   end
 
   # PUT /comments/1
