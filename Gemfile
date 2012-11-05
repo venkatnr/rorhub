@@ -17,6 +17,8 @@ gem 'oauth2'
 gem 'omniauth-facebook'
 gem "will_paginate", "~> 3.0.3"
 gem "simple-navigation"
+gem 'heroku'
+gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
