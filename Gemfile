@@ -5,7 +5,7 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
 gem 'mongoid', '~> 2.4.6'
 gem 'therubyracer'
 gem 'bson_ext'
